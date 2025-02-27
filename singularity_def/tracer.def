@@ -1,0 +1,55 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%labels
+    Author Virag Sharma
+    Version v1.0
+    Description Singularity image for Tracer tool for assembling full-length TCR sequences.
+
+%environment
+    export LC_ALL=C
+    export PATH=/opt/conda/bin:$PATH
+
+%post
+    # Update and install basic dependencies
+    apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        wget \
+        bzip2 \
+        ca-certificates \
+        libglib2.0-0 \
+        libxext6 \
+        libsm6 \
+        libxrender1 \
+        git \
+        curl \
+        unzip \
+        libz-dev \
+        libbz2-dev \
+        liblzma-dev \
+        libncurses5-dev \
+        libncursesw5-dev
+
+    # Install Miniconda
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
+    bash /tmp/miniconda.sh -b -p /opt/conda
+    rm /tmp/miniconda.sh
+    export PATH=/opt/conda/bin:$PATH
+
+    # Set up conda channels
+    conda config --add channels defaults
+    conda config --add channels bioconda
+    conda config --add channels conda-forge
+
+    # Install Tracer and Bracer
+    conda install -y tracer
+
+    # Clean up
+    apt-get clean
+    conda clean -a -y
+    rm -rf /var/lib/apt/lists/*
+
+%runscript
+    echo "Welcome to the Tracer Singularity image!"
+    echo "Available commands: tracer"
+    exec "$@"
