@@ -6,10 +6,10 @@ Basically, this repo hosts Singularity definition (.def) files for a variety of 
 ### Why Singularity?
 Singularity is a powerful containerization platform widely used in high-performance computing (HPC) and bioinformatics. It allows you to package software, dependencies, and workflows into a single container, ensuring consistency and reproducibility across systems. Unlike other containerization tools, Singularity is designed with security and ease of use in mind, making it ideal for shared and multi-user environments.
 
-##### What is contained in this repo?
+### What is contained in this repo?
 This repository contains .def files for building Singularity images (.sif) for a range of bioinformatics tools. Each .def file defines the base image, software dependencies, and installation steps required to create a functional container. While the actual .sif images are not included due to size constraints, these can be easily built using the .def files
 
-#### How to use
+### How to use
 1. Install Singularity - ensure that singularity is installed on your system. For installation instructions, you may need to refer to the official documentation for singularity
 2. Build containers - use the .def files in this repository to build singularity images. Here is an example:
 ```
